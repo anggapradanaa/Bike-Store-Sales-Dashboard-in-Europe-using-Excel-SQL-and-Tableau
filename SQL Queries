@@ -1,0 +1,63 @@
+SELECT SUM(total_revenue) AS total_revenue FROM bike_sales
+
+SELECT SUM(total_cost) AS total_cost FROM bike_sales
+
+SELECT SUM(profit) AS total_profit FROM bike_sales
+
+SELECT SUM(order_quantity) AS total_product_sold FROM bike_sales
+
+SELECT DATEPART(YEAR, order_date) AS order_years, 
+SUM(order_quantity) AS total_product_sold, SUM(total_revenue) AS total_revenue 
+FROM bike_sales
+GROUP BY DATEPART(YEAR, order_date) 
+ORDER BY DATEPART(YEAR, order_date) 
+
+SELECT 
+DATEPART(MONTH, order_date) AS order_month, 
+SUM(order_quantity) AS total_product_sold,
+SUM(total_revenue) AS total_revenue
+FROM bike_sales
+GROUP BY DATEPART(MONTH, order_date)
+ORDER BY DATEPART(MONTH, order_date)
+
+SELECT DATEPART(ISO_WEEK, order_date) AS Order_Weeks, 
+SUM(order_quantity) AS total_product_sold, SUM(total_revenue) AS total_revenue 
+FROM bike_sales
+GROUP BY DATEPART(ISO_WEEK, order_date)
+ORDER BY DATEPART(ISO_WEEK, order_date)
+
+SELECT product_category, SUM(total_revenue) AS total_revenue
+FROM bike_sales
+GROUP BY product_category
+ORDER BY SUM(total_revenue) DESC
+
+SELECT age_group,
+SUM(order_quantity) AS total_product,
+SUM(total_revenue) AS total_revenue
+FROM bike_sales
+GROUP BY age_group
+ORDER BY total_revenue DESC 
+
+SELECT customer_gender,
+SUM(order_quantity) AS total_product,
+SUM(total_revenue) AS total_revenue
+FROM bike_sales
+GROUP BY customer_gender
+ORDER BY total_revenue DESC 
+
+SELECT country, 
+SUM(order_quantity) AS total_product,
+SUM(total_revenue) AS total_revenue
+FROM bike_sales
+GROUP BY country
+ORDER BY total_revenue DESC
+
+SELECT TOP 5 product, SUM(total_revenue) AS revenue
+FROM bike_sales
+GROUP BY product
+ORDER BY SUM(total_revenue) DESC
+
+SELECT TOP 5 product, SUM(total_revenue) AS revenue
+FROM bike_sales
+GROUP BY product
+ORDER BY SUM(total_revenue)
